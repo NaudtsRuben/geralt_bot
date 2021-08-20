@@ -1,5 +1,6 @@
 const fs = require('fs');
-const { token } = require('./config.json');
+//const { token } = require('./config.json');
+const token = process.env.token;
 const { Client, Intents, Collection } = require('discord.js');
 const fetch = require('node-fetch');
 
