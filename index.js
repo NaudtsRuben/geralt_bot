@@ -19,6 +19,7 @@ for (const file of commandFiles) {
     client.commands.set(command.data.name, command);
 }
 
+
 let re = new RegExp('(F|f)uck');
 
 client.on('ready', () => {
