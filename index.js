@@ -1,7 +1,7 @@
 const fs = require('fs');
-const { token } = require('./config.json');
-//const token = process.env.token;
-const { Client, Intents, Collection } = require('discord.js');
+//const { token } = require('./config.json');
+const token = process.env.token;
+const { Client, Intents, Collection} = require('discord.js');
 const fetch = require('node-fetch');
 
 
@@ -88,8 +88,15 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	try {
-		if (interaction.commandName === 'disable-channel') {
-			await interaction.reply('disableChannel works!');
+		if (interaction.commandName === 'goat') {
+			const mentionable = interaction.options.getMentionable('mentionable');
+			console.log(mentionable);
+			if(mentionable.user){
+				await mentionable.user.send("https://tenor.com/beIX0.gif");
+				await interaction.reply({content: "Goat has been sent...", ephemeral: true});
+			}else{
+				await interaction.reply({content: "You have to mention a user.", ephemeral: true});
+			}
 		}
 	} catch (error) {
 		console.error(error);
@@ -100,5 +107,3 @@ client.on('interactionCreate', async interaction => {
 
 //logs in the client
 client.login(token);
-
-
