@@ -10,6 +10,7 @@ myIntents.add(Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES);
 const client = new Client({ intents: myIntents });
 
 
+
 //Initialize all message commands
 client.commands = new Collection();
 const messageCommandFiles = fs.readdirSync('./messageCommands').filter(file => file.endsWith('.js'));
@@ -24,6 +25,8 @@ for (const file of messageCommandFiles) {
 //prints message to console once the client is ready
 client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
+	client.user.setActivity('https://github.com/NaudtsRuben/geralt_bot');
+
 });
 
 
