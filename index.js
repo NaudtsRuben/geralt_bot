@@ -1,6 +1,6 @@
 const fs = require('fs');
-//const { token } = require('./config.json');
-const token = process.env.token;
+const { token } = require('./config.json');
+//const token = process.env.token;
 const { Client, Intents, Collection} = require('discord.js');
 
 
@@ -29,6 +29,12 @@ client.on('ready', () => {
 
 //triggers message commands whenever a new message is created, which contains the command string as a word
 client.on('messageCreate', async message => {
+	// if(message.author.bot) return;
+
+	// if(message.channel.type === "DM"){
+	// 	message.reply('https://tenor.com/bfLrv.gif');
+	// }
+
 
 	const words = message.content.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()@\+\?><\[\]\+]/g, "").split(" ");
 	words.forEach(word => {
@@ -51,13 +57,25 @@ client.on('interactionCreate', async interaction => {
 
 	if (!interaction.isCommand()) return;
 
+
 	try {
 		if (interaction.commandName === 'goat') {
 			const mentionable = interaction.options.getMentionable('mentionable');
-			console.log(mentionable);
 			if(mentionable.user){
 				await mentionable.user.send("https://tenor.com/beIX0.gif");
+				await mentionable.user.send(`Courtesy of <@${interaction.user.id}>`);
+
+				// const filter = m => interaction.user.id === m.author.id;
+				// mentionable.user.dmChannel.awaitMessages({ filter, time: 60000, max: 1, errors: ['time'] })
+				// .then(messages => {
+				// 	interaction.followUp(`You've entered: ${messages.first().content}`);
+				// })
+				// .catch(() => {
+				// 	interaction.followUp('You did not enter any input!');
+				// });
+
 				await interaction.reply({content: "Goat has been sent...", ephemeral: true});
+				
 			}else{
 				await interaction.reply({content: "You have to mention a user.", ephemeral: true});
 			}
