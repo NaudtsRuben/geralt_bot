@@ -1,12 +1,12 @@
 const fs = require('fs');
-const { token } = require('./config.json');
-//const token = process.env.token;
-const { Client, Intents, Collection} = require('discord.js');
+//const { token } = require('./config.json');
+const token = process.env.token;
+const { Client, Intents, Collection } = require('discord.js');
 
 
 //Initialize client
 const myIntents = new Intents();
-myIntents.add(Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES);
+myIntents.add(Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES);
 const client = new Client({ intents: myIntents });
 
 
@@ -29,12 +29,15 @@ client.on('ready', () => {
 
 //triggers message commands whenever a new message is created, which contains the command string as a word
 client.on('messageCreate', async message => {
-	// if(message.author.bot) return;
+	//checks if message was written by a bot
+	if (message.author.bot) return;
 
-	// if(message.channel.type === "DM"){
-	// 	message.reply('https://tenor.com/bfLrv.gif');
-	// }
-
+	//logs message if it was a DM, then replies with "hmmm" gif.
+	if (message.channel.type === "DM") {
+		console.log(`${message.createdAt}: ${message.author.username}: ${message.content}`);
+		message.reply('https://tenor.com/bfLrv.gif');
+		return;
+	}
 
 	const words = message.content.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()@\+\?><\[\]\+]/g, "").split(" ");
 	words.forEach(word => {
@@ -54,30 +57,20 @@ client.on('messageCreate', async message => {
 
 //triggers whenever a slash command is executed
 client.on('interactionCreate', async interaction => {
-
 	if (!interaction.isCommand()) return;
-
 
 	try {
 		if (interaction.commandName === 'goat') {
 			const mentionable = interaction.options.getMentionable('mentionable');
-			if(mentionable.user){
-				await mentionable.user.send("https://tenor.com/beIX0.gif");
-				await mentionable.user.send(`Courtesy of <@${interaction.user.id}>`);
+			if (mentionable.user) {
 
-				// const filter = m => interaction.user.id === m.author.id;
-				// mentionable.user.dmChannel.awaitMessages({ filter, time: 60000, max: 1, errors: ['time'] })
-				// .then(messages => {
-				// 	interaction.followUp(`You've entered: ${messages.first().content}`);
-				// })
-				// .catch(() => {
-				// 	interaction.followUp('You did not enter any input!');
-				// });
+				await mentionable.user.send("https://tenor.com/beIX0.gif").then(sentMessage => {
+					sentMessage.reply(`Courtesy of <@${interaction.user.id}>`);
+				});
 
-				await interaction.reply({content: "Goat has been sent...", ephemeral: true});
-				
-			}else{
-				await interaction.reply({content: "You have to mention a user.", ephemeral: true});
+				await interaction.reply({ content: "Goat has been sent...", ephemeral: true });
+			} else {
+				await interaction.reply({ content: "You have to mention a user.", ephemeral: true });
 			}
 		}
 	} catch (error) {
