@@ -36,7 +36,7 @@ for (const file of messageCommandFiles) {
 //prints message to console once the client is ready
 client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
-	client.user.setActivity('https://github.com/NaudtsRuben/geralt_bot');
+	client.user.setActivity('https://git.io/JEiRH');
 
 });
 
