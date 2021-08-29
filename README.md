@@ -1,4 +1,4 @@
-# geralt_bot v1.1.0
+# geralt_bot v1.1.1
 
 Just a simple bot I made while learning how to develop discord bots. 
 
@@ -20,11 +20,14 @@ When added to a server, it listens in conversations for the following words, aft
 
 ### Slash commands
 
-Since version 1.1.0, the bot now features slash commands. These commands are the following.
+Since version 1.1.1, the bot now features slash commands. These commands are the following.
 
-| Command            | Description                                                                       |
-|--------------------|-----------------------------------------------------------------------------------|
-| /goat @mentionable | Sends the following gif to the mentioned user's DM's: https://tenor.com/beIX0.gif |
+| Command       | Description                                                                       |
+|---------------|-----------------------------------------------------------------------------------|
+| /goat @user   | Sends the following gif to the mentioned user's DM's: https://tenor.com/beIX0.gif |
+| /release-data | Shows future release dates of most 'the witcher' related stuff.                   |
+
+
 
 
 ## Invite link:
