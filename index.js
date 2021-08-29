@@ -1,8 +1,19 @@
 const fs = require('fs');
 //const { token } = require('./config.json');
 const token = process.env.token;
-const { Client, Intents, Collection } = require('discord.js');
+const { Client, Intents, Collection, MessageEmbed } = require('discord.js');
 
+//Initialize release date message
+const releaseDatesEmbed = new MessageEmbed()
+	.setTitle("Future release dates")
+	.setDescription("All known future release dates for 'The Witcher' related content. This includes the Netflix show and the video game series from CD Project Red.")
+	.setImage("https://reelsrated.com/wp-content/uploads/2021/04/The-Witcher-Season-2-1280x720-1.jpeg")
+	.addFields(
+		{name: "Netflix The Witcher season 2 release date", value: "Fri 17 December, 2021"},
+		{name: "The Witcher 3 next gen update", value: "Somewhere in 2021"}
+	)
+	.setTimestamp()
+	.setFooter("Last updated on 2021/08/29.")
 
 //Initialize client
 const myIntents = new Intents();
@@ -72,6 +83,12 @@ client.on('interactionCreate', async interaction => {
 			} else {
 				await interaction.reply({ content: "You have to mention a user.", ephemeral: true });
 			}
+		}
+		if (interaction.commandName === 'release-data') {
+
+
+			interaction.reply({embeds: [releaseDatesEmbed]});
+			//December 17, 2021
 		}
 	} catch (error) {
 		console.error(error);
