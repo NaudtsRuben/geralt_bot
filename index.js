@@ -1,6 +1,6 @@
 const fs = require('fs');
-//const { token } = require('./config.json');
-const token = process.env.token;
+const { token } = require('./config.json');
+//const token = process.env.token;
 const { Client, Intents, Collection, MessageEmbed } = require('discord.js');
 
 //Initialize release date message
@@ -9,11 +9,26 @@ const releaseDatesEmbed = new MessageEmbed()
 	.setDescription("All known future release dates for 'The Witcher' related content. This includes the Netflix show and the video game series from CD Project Red.")
 	.setImage("https://reelsrated.com/wp-content/uploads/2021/04/The-Witcher-Season-2-1280x720-1.jpeg")
 	.addFields(
-		{name: "Netflix The Witcher season 2 release date", value: "Fri 17 December, 2021"},
-		{name: "The Witcher 3 next gen update", value: "Somewhere in 2021"}
+		{ name: "Netflix The Witcher season 2 release date", value: "Fri 17 December, 2021" },
+		{ name: "The Witcher 3 next gen update", value: "Somewhere in 2021" }
 	)
-	.setTimestamp()
-	.setFooter("Last updated on 2021/08/29.")
+	.setFooter("Last updated on 2021/08/29.");
+
+//Initialize help message
+const helpEmbed = new MessageEmbed()
+	.setTitle("Geralt-bot help")
+	.setDescription("All functionalities of the Geralt-bot. More information can be found here: https://git.io/JEiRH")
+	.setThumbnail("https://upload.wikimedia.org/wikipedia/en/c/c9/Geralt_of_Rivia_Witcher.png")
+	.setImage("https://assets1.ignimgs.com/2018/03/08/geralt-thumbs-up-1024x576-1520522063241.jpg")
+	.addFields(
+		{ name: "\u200B", value: "\u200B" },
+		{ name: "Message trigger words", value: "Geralt-bot will listen to following words in a conversation and react with a corresponding gif: ah, angry, fuck, hmm, hmmm, sleep, sorry" },
+		{ name: "\u200B", value: "\u200B" },
+		{ name: "/goat @user", value: "This command will send an insulting gif to the mentioned user's dm's with your regards." },
+		{ name: "/release-data", value: "Show an overview of all future release data of witcher related content" },
+		{ name: "/help", value: "Sends this message to your dm's." }
+	)
+	.setFooter("Last updated on 2021/08/29.");
 
 //Initialize client
 const myIntents = new Intents();
@@ -49,7 +64,7 @@ client.on('messageCreate', async message => {
 	//logs message if it was a DM, then replies with "hmmm" gif.
 	if (message.channel.type === "DM") {
 		console.log(`${message.createdAt}: ${message.author.username}: ${message.content}`);
-		message.reply('https://tenor.com/bfLrv.gif');
+		message.channel.send('https://tenor.com/bfLrv.gif');
 		return;
 	}
 
@@ -88,10 +103,11 @@ client.on('interactionCreate', async interaction => {
 			}
 		}
 		if (interaction.commandName === 'release-data') {
-
-
-			interaction.reply({embeds: [releaseDatesEmbed]});
-			//December 17, 2021
+			interaction.reply({ embeds: [releaseDatesEmbed] });
+		}
+		if (interaction.commandName === 'help') {
+			interaction.user.send({ embeds: [helpEmbed] });
+			interaction.reply("check your dm's", ephemeral = true);
 		}
 	} catch (error) {
 		console.error(error);
