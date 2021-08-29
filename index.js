@@ -15,14 +15,16 @@ const client = new Client({ intents: myIntents });
 
 
 
-//Initialize all message commands
+//Initialize all commands
 client.commands = new Collection();
 const messageCommandFiles = fs.readdirSync('./messageCommands').filter(file => file.endsWith('.js'));
+const messageCommands = [];
 const slashCommandFiles = fs.readdirSync('./slashCommands').filter(file => file.endsWith('.js'));
 
 for (const file of messageCommandFiles) {
 	const command = require(`./messageCommands/${file}`);
 	client.commands.set(command.data.name, command);
+	messageCommands.push(command.data.name);
 }
 
 for (const file of slashCommandFiles) {
@@ -54,9 +56,10 @@ client.on('messageCreate', async message => {
 
 	const words = message.content.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()@\+\?><\[\]\+]/g, "").split(" ");
 	words.forEach(word => {
+		
 		const command = client.commands.get(word);
 
-		if (!command) return;
+		if (!command || !messageCommands.includes(command.data.name)) return;
 
 		try {
 			command.execute(message);
