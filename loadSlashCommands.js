@@ -1,6 +1,6 @@
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const { prodToken } = require('./config.json');
+const { prodToken, token } = require('./config.json');
 const fs = require('fs');
 
 const clientId = '875728074979827824';
@@ -16,6 +16,8 @@ for (const file of slashCommandFiles) {
 }
 
 const rest = new REST({ version: '9' }).setToken(prodToken);
+//const rest = new REST({ version: '9' }).setToken(token);
+
 
 (async () => {
 	try {
