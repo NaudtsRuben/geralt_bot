@@ -5,8 +5,8 @@ module.exports = {
 		.setName('goat')
 		.setDescription("Sends an insulting gif to the mentioned user's dm's. Followed by your ID.")
         .addMentionableOption(option => option
-            .setName('mentionable')
-            .setDescription('Mention someone')
+            .setName('user')
+            .setDescription('Mention a user')
             .setRequired(true)
         ),
         async execute(interaction) {
