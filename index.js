@@ -1,6 +1,6 @@
 const fs = require('fs');
-const { token } = require('./config.json');
-//const token = process.env.token;
+//const { token } = require('./config.json');
+const token = process.env.token;
 const { Client, Intents, Collection, MessageEmbed } = require('discord.js');
 
 
