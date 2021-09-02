@@ -65,7 +65,7 @@ client.on('messageCreate', async message => {
 			command.execute(message);
 		} catch (error) {
 			console.error(error);
-			message.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+			message.reply({ content: 'There was an error while executing this command!'});
 		}
 	});
 });

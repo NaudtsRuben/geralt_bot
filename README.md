@@ -1,6 +1,8 @@
 # geralt_bot v1.1.1
 
-Just a simple bot I made while learning how to develop discord bots. 
+Just a simple bot I made while learning how to develop discord bots.
+
+The latest version of the bot can be found here: https://git.io/JEiRH. This repo will not be updated any further
 
 ## Features:
 ### Message listener
@@ -24,6 +26,7 @@ Since version 1.1.1, the bot now features slash commands. These commands are the
 
 | Command       | Description                                                                       |
 |---------------|-----------------------------------------------------------------------------------|
+| /help         | Sends an overview of the bot's functionalities to your DM's                       |
 | /goat @user   | Sends the following gif to the mentioned user's DM's: https://tenor.com/beIX0.gif |
 | /release-data | Shows future release dates of most 'the witcher' related stuff.                   |
 
@@ -31,4 +34,4 @@ Since version 1.1.1, the bot now features slash commands. These commands are the
 
 
 ## Invite link:
-Click here to [invite the bot to your discord server.](https://discord.com/api/oauth2/authorize?client_id=875728074979827824&permissions=3072&scope=applications.commands%20bot)
+See [version 2](https://git.io/JEiRH) for the invite link

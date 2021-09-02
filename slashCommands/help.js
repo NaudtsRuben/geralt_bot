@@ -21,8 +21,8 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('help')
 		.setDescription("Shows an overview of the bot's funcionalities"),
-        async execute(interaction){
-            interaction.user.send({ embeds: [helpEmbed] });
-			interaction.reply("check your dm's", ephemeral = true);
-        }
+	async execute(interaction) {
+		interaction.user.send({ embeds: [helpEmbed] });
+		interaction.reply({ content: "check your dm's", ephemeral: true });
+	}
 };
